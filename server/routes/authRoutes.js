@@ -10,7 +10,13 @@ module.exports = app => {
     );
 
     // user is attempting to turn their code into a profile
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get(
+        '/auth/google/callback', 
+        passport.authenticate('google'),
+        (req, res) => {
+            res.redirect("/surveys");
+        }
+    );
 
     // when user makes get request to the route /api/logout, log out user
     app.get('/api/logout', (req, res) => {
